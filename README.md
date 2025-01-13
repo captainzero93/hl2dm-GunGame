@@ -27,6 +27,8 @@ Progress through weapons by eliminating other players. Each kill advances you to
 
 Inspired ( and derived) from the original post on [AlliedModders Forums](https://forums.alliedmods.net/showthread.php?p=2803056)
 
+## Requirements
+
 - Sourcemod
 - Half-Life 2 Deathmatch
 
