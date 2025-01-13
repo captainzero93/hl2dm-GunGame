@@ -2,6 +2,7 @@
 
 Progress through weapons by eliminating other players. Each kill advances you to the next weapon. The first player to get a kill with the final weapon wins!
 
+I have also included mods to clear the maps of weapons and grenades and provide infinite ammo. 
 ## Weapon Progression
 
 1. SMG1
