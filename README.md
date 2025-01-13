@@ -17,7 +17,7 @@ Progress through weapons by eliminating other players. Each kill advances you to
 
 - **Crowbar** is always available
 - **Gravity Gun** remains with you through all levels
-- Killing someone with **Crowbar** will demote them one level!
+- Killing someone with the **Crowbar** will demote them one level!
 
 ## Gameplay 
 
