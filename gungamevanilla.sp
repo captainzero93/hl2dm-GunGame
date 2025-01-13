@@ -70,6 +70,128 @@ public Action RemoveWeapons(Handle timer, any client)
     return Plugin_Continue;
 }
 
+public Action GunGameWeapons(Handle timer, any client)
+{
+   if(!IsValidClient(client)) return Plugin_Continue;
+
+   char primaryWeapon[32];
+   switch(Level1[client])
+   {
+       case 0: // Level 1
+       {
+           primaryWeapon = "weapon_smg1";
+           GivePlayerItem(client, "weapon_crowbar");      
+           GivePlayerItem(client, "weapon_physcannon");   
+           int weapon = GivePlayerItem(client, primaryWeapon);  
+           if(weapon != -1)                                     
+           {
+               SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+           }
+       }
+       case 2: // Level 2
+       {
+           primaryWeapon = "weapon_ar2";
+           GivePlayerItem(client, "weapon_crowbar");
+           GivePlayerItem(client, "weapon_physcannon");
+           int weapon = GivePlayerItem(client, primaryWeapon);
+           if(weapon != -1)
+           {
+               SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+           }
+       }
+       case 3: // Level 3
+       {
+           primaryWeapon = "weapon_shotgun";
+           GivePlayerItem(client, "weapon_crowbar");
+           GivePlayerItem(client, "weapon_physcannon");
+           int weapon = GivePlayerItem(client, primaryWeapon);
+           if(weapon != -1)
+           {
+               SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+           }
+       }
+       case 4: // Level 4
+       {
+           primaryWeapon = "weapon_357";
+           GivePlayerItem(client, "weapon_crowbar");
+           GivePlayerItem(client, "weapon_physcannon");
+           int weapon = GivePlayerItem(client, primaryWeapon);
+           if(weapon != -1)
+           {
+               SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+           }
+       }
+       case 5: // Level 5
+       {
+           primaryWeapon = "weapon_crossbow";
+           GivePlayerItem(client, "weapon_crowbar");
+           GivePlayerItem(client, "weapon_physcannon");
+           int weapon = GivePlayerItem(client, primaryWeapon);
+           if(weapon != -1)
+           {
+               SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+           }
+       }
+       case 6: // Level 6
+       {
+           primaryWeapon = "weapon_rpg";
+           GivePlayerItem(client, "weapon_crowbar");
+           GivePlayerItem(client, "weapon_physcannon");
+           int weapon = GivePlayerItem(client, primaryWeapon);
+           if(weapon != -1)
+           {
+               SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+           }
+       }
+       case 7: // Level 7
+       {
+           primaryWeapon = "weapon_pistol";
+           GivePlayerItem(client, "weapon_crowbar");
+           GivePlayerItem(client, "weapon_physcannon");
+           int weapon = GivePlayerItem(client, primaryWeapon);
+           if(weapon != -1)
+           {
+               SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+           }
+       }
+       case 8: // Level 8 (Final)
+       {
+           primaryWeapon = "weapon_stunstick";
+           GivePlayerItem(client, "weapon_physcannon");
+           int weapon = GivePlayerItem(client, primaryWeapon);
+           if(weapon != -1)
+           {
+               SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+           }
+       }
+   }
+   
+   // Double-check weapon selection
+   CreateTimer(0.1, ForceSwitchToPrimary, client);
+   return Plugin_Continue;
+}
+
+public Action ForceSwitchToPrimary(Handle timer, any client)
+{
+    if(!IsValidClient(client)) return Plugin_Continue;
+    
+    char primaryWeapon[32];
+    switch(Level1[client])
+    {
+        case 0: primaryWeapon = "weapon_smg1";
+        case 2: primaryWeapon = "weapon_ar2";
+        case 3: primaryWeapon = "weapon_shotgun";
+        case 4: primaryWeapon = "weapon_357";
+        case 5: primaryWeapon = "weapon_crossbow";
+        case 6: primaryWeapon = "weapon_rpg";
+        case 7: primaryWeapon = "weapon_pistol";
+        case 8: primaryWeapon = "weapon_stunstick";
+    }
+    
+    FakeClientCommand(client, "use %s", primaryWeapon);
+    return Plugin_Continue;
+}
+
 public Action WonRound(Handle timer, any client)
 {
     for(int i = 1; i <= MaxClients; i++)
@@ -80,6 +202,21 @@ public Action WonRound(Handle timer, any client)
         }
     }
     CreateTimer(1.0, mapboot2);
+    return Plugin_Continue;
+}
+
+public Action DisplayHud(Handle timer, any client)
+{
+    if(IsClientConnected(client) && IsClientInGame(client))
+    {
+        char levelDisplay[8];
+        IntToString(Level1[client] == 0 ? 1 : Level1[client], levelDisplay, sizeof(levelDisplay));
+
+        SetHudTextParams(0.015, 0.015, HUDTICK, 255, 255, 255, 255, 0, 6.0, 0.1, 0.2);
+        ShowHudText(client, -1, "|GunGame|\n|Level %s| \n|Info| \n|Beat Level 8|\n|to Win|", levelDisplay);     
+        
+        CreateTimer(HUDTICK, DisplayHud, client);
+    }
     return Plugin_Continue;
 }
 
@@ -154,109 +291,6 @@ public Action mapboot433(Handle timer) {
     ServerCommand("sm_say NEXT Round STARTS NOW!!!!");
     ServerCommand("sm_say NEXT Round STARTS NOW!!!!");
     ServerCommand("sm_say NEXT Round STARTS NOW!!!!");
-    return Plugin_Continue;
-}
-
-public Action DisplayHud(Handle timer, any client)
-{
-    if(IsClientConnected(client) && IsClientInGame(client))
-    {
-        char levelDisplay[8];
-        IntToString(Level1[client] == 0 ? 1 : Level1[client], levelDisplay, sizeof(levelDisplay));
-
-        SetHudTextParams(0.015, 0.015, HUDTICK, 255, 255, 255, 255, 0, 6.0, 0.1, 0.2);
-        ShowHudText(client, -1, "|GunGame|\n|Level %s| \n|Info| \n|Beat Level 8|\n|to Win|", levelDisplay);     
-        
-        CreateTimer(HUDTICK, DisplayHud, client);
-    }
-    return Plugin_Continue;
-}
-
-public Action GunGameWeapons(Handle timer, any client)
-{
-    if(!IsValidClient(client)) return Plugin_Continue;
-
-    char primaryWeapon[32];
-    switch(Level1[client])
-    {
-        case 0: // Level 1
-        {
-            primaryWeapon = "weapon_smg1";
-            GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_crowbar");
-            GivePlayerItem(client, "weapon_physcannon");
-        }
-        case 2: // Level 2
-        {
-            primaryWeapon = "weapon_ar2";
-            GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_crowbar");
-            GivePlayerItem(client, "weapon_physcannon");
-        }
-        case 3: // Level 3
-        {
-            primaryWeapon = "weapon_shotgun";
-            GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_crowbar");
-            GivePlayerItem(client, "weapon_physcannon");
-        }
-        case 4: // Level 4
-        {
-            primaryWeapon = "weapon_357";
-            GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_crowbar");
-            GivePlayerItem(client, "weapon_physcannon");
-        }
-        case 5: // Level 5
-        {
-            primaryWeapon = "weapon_crossbow";
-            GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_crowbar");
-            GivePlayerItem(client, "weapon_physcannon");
-        }
-        case 6: // Level 6
-        {
-            primaryWeapon = "weapon_rpg";
-            GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_crowbar");
-            GivePlayerItem(client, "weapon_physcannon");
-        }
-        case 7: // Level 7
-        {
-            primaryWeapon = "weapon_pistol";
-            GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_crowbar");
-            GivePlayerItem(client, "weapon_physcannon");
-        }
-        case 8: // Level 8 (Final)
-        {
-            primaryWeapon = "weapon_stunstick";
-            GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_physcannon");
-        }
-    }
-    
-    // Force switch to the primary weapon
-    CreateTimer(0.1, SwitchToPrimary, client);
-    return Plugin_Continue;
-}
-
-public Action SwitchToPrimary(Handle timer, any client)
-{
-    if(IsValidClient(client))
-    {
-        ClientCommand(client, "use weapon_crowbar"); // First switch to crowbar
-        CreateTimer(0.1, SwitchFromCrowbar, client); // Then switch from crowbar to ensure weapon switch
-    }
-    return Plugin_Continue;
-}
-
-public Action SwitchFromCrowbar(Handle timer, any client)
-{
-    if(IsValidClient(client))
-    {
-        FakeClientCommand(client, "lastinv"); // Switch from crowbar to primary weapon
-    }
     return Plugin_Continue;
 }
 
