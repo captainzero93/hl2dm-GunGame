@@ -25,7 +25,7 @@ Progress through weapons by eliminating other players. Each kill advances you to
 
 ## 🔗 Original Source
 
-Inspired by the original thread on [AlliedModders Forums](https://forums.alliedmods.net/showthread.php?p=2803056)
+Inspired ( and derived) from the original post on [AlliedModders Forums](https://forums.alliedmods.net/showthread.php?p=2803056)
 
 - Sourcemod
 - Half-Life 2 Deathmatch
