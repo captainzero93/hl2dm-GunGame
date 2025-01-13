@@ -1,5 +1,4 @@
 #pragma semicolon 1
-
 #include <sourcemod>
 #include <sdktools>
 
@@ -34,7 +33,11 @@ public Action CleanupTimer(Handle timer)
                StrEqual(model, "models/Weapons/w_shotgun.mdl", false) ||
                StrEqual(model, "models/Weapons/W_pistol.mdl", false) ||
                StrEqual(model, "models/Weapons/w_smg1.mdl", false) ||
-               StrEqual(model, "models/Weapons/w_stunbaton.mdl", false))
+               StrEqual(model, "models/Weapons/w_stunbaton.mdl", false) ||
+               StrEqual(model, "models/Weapons/w_slam.mdl", false) ||          // Added SLAM
+               StrEqual(model, "models/Weapons/w_hopwire.mdl", false) ||       // Added Hopwire
+               StrEqual(model, "models/Weapons/w_grenade_frag.mdl", false) ||  // Added Frag Grenade
+               StrEqual(model, "models/Weapons/w_bugbait.mdl", false))         // Added Bugbait
             {
                 AcceptEntityInput(x, "Kill");
             }
