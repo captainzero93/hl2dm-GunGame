@@ -3,24 +3,20 @@
 #define PLUGIN_VERSION "1.0"
 
 public Plugin:myinfo = {
-    name = "Infinite Ammo",
+    name = "Infinite Reserve Ammo",
     author = "Modified for GunGame",
-    description = "Gives all players infinite ammo",
+    description = "Gives all players infinite reserve ammo",
     version = PLUGIN_VERSION,
     url = ""
 };
 
 new activeoffset;
-new clipoffset;
-new secondclipoffset;
 new maxclients;
 
 public OnPluginStart()
 {
-    // Get weapon offsets
+    // Get weapon offset
     activeoffset = FindSendPropInfo("CAI_BaseNPC", "m_hActiveWeapon");
-    clipoffset = FindSendPropInfo("CBaseCombatWeapon", "m_iClip1");
-    secondclipoffset = FindSendPropInfo("CBaseCombatWeapon", "m_iSecondaryAmmoType");
     
     // Create timer for infinite ammo checks
     CreateTimer(0.1, AmmoTimer, _, TIMER_REPEAT);
@@ -33,7 +29,7 @@ public OnMapStart() {
 public Action:AmmoTimer(Handle:timer)
 {
     new iWeapon;
-    new iSecondAmmo;
+    new iAmmoType;
     
     for(new iClient = 1; iClient <= maxclients; iClient++)
     {
@@ -41,13 +37,19 @@ public Action:AmmoTimer(Handle:timer)
         {
             iWeapon = GetEntDataEnt2(iClient, activeoffset);
             if(IsValidEntity(iWeapon)) {
-                // Set primary ammo
-                SetEntData(iWeapon, clipoffset, 50, 4, true);
+                // Get primary ammo type
+                iAmmoType = GetEntProp(iWeapon, Prop_Send, "m_iPrimaryAmmoType");
+                if(iAmmoType != -1) {
+                    // Set reserve ammo to max (999)
+                    SetEntProp(iClient, Prop_Send, "m_iAmmo", 999, _, iAmmoType);
+                }
                 
-                // Set secondary ammo
-                iSecondAmmo = GetEntData(iWeapon, secondclipoffset, 1);
-                if (iSecondAmmo != 255)
-                    SetEntProp(iClient, Prop_Send, "m_iAmmo", 5, _, iSecondAmmo);
+                // Get and set secondary ammo type
+                iAmmoType = GetEntProp(iWeapon, Prop_Send, "m_iSecondaryAmmoType");
+                if(iAmmoType != -1) {
+                    // Set secondary reserve ammo to max
+                    SetEntProp(iClient, Prop_Send, "m_iAmmo", 999, _, iAmmoType);
+                }
             }
         }
     }
