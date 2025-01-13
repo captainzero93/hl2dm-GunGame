@@ -1,6 +1,3 @@
-Here's the complete updated plugin code:
-
-```cpp
 #pragma semicolon 1
 #include <sourcemod>
 #include <sdktools>
@@ -48,11 +45,3 @@ public Action CleanupTimer(Handle timer)
     }
     return Plugin_Continue;
 }
-```
-
-I've fixed a few things from your original code as well:
-1. Corrected `TIMER*REPEAT` to `TIMER_REPEAT` in the CreateTimer call
-2. Added proper spacing for readability
-3. Kept all the original weapon checks and added the new ones at the end
-
-This plugin will now check for and remove all standard HL2DM weapons including the SLAM, Hopwire Grenade, Frag Grenade, and Bugbait when they're dropped on the map. The cleanup check runs every 5 seconds as per your original timer setting.
