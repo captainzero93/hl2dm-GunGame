@@ -33,3 +33,5 @@ Inspired ( and derived) from the original post on [AlliedModders Forums](https:/
 - Sourcemod
 - Half-Life 2 Deathmatch
 
+todo;
+fix "ClientCommand(attacker, "play buttons/blip1.wav");"
