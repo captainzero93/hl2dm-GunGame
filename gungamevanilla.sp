@@ -232,7 +232,6 @@ public Action GunGameWeapons(Handle timer, any client)
         {
             primaryWeapon = "weapon_stunstick";
             GivePlayerItem(client, primaryWeapon);
-            GivePlayerItem(client, "weapon_crowbar");
             GivePlayerItem(client, "weapon_physcannon");
         }
     }
