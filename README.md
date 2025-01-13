@@ -23,13 +23,10 @@ Progress through weapons by eliminating other players. Each kill advances you to
 
 [![Gun Game Gameplay](https://streamable.com/ppf821)](https://streamable.com/ppf821)
 
-## 🔗 Original Source
+## Original Source
 
 Inspired ( and derived) from the original post on [AlliedModders Forums](https://forums.alliedmods.net/showthread.php?p=2803056)
 
 - Sourcemod
 - Half-Life 2 Deathmatch
 
-## 🤝 Contributing
-
-Contributions are welcome! 
