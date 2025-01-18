@@ -20,10 +20,6 @@ I have also included mods to clear the maps of weapons and grenades and provide 
 - **Gravity Gun** remains with you through all levels
 - Killing someone with the **Crowbar** will demote them one level!
 
-## (Beta) Gameplay
-
-[![Gun Game Gameplay](https://streamable.com/ppf821)](https://streamable.com/ppf821)
-
 ## Original Source
 
 Inspired ( and derived) from the original post on [AlliedModders Forums](https://forums.alliedmods.net/showthread.php?p=2803056)
