@@ -24,6 +24,8 @@ I have also included mods to clear the maps of weapons and grenades and provide 
 
 Inspired ( and derived) from the original post on [AlliedModders Forums](https://forums.alliedmods.net/showthread.php?p=2803056)
 
+compiled here: https://forums.alliedmods.net/showthread.php?p=2832654
+
 ## Requirements
 
 - Sourcemod
